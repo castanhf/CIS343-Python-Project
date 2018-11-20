@@ -14,7 +14,17 @@ from curses import wrapper
 
 def main():
     player = Player()
-    front_end = FrontEnd(player)
+
+    # try and except block
+    try:
+        front_end = FrontEnd(player)
+    except CLI_Audio_File_Exception:
+        err = CLI_Audio_File_Exception()
+        err.error()
+    except CLI_Audio_Screen_Size_Exception:
+        err = CLI_Audio_Screen_Size_Exception
+        err.error()
+
 
 if __name__ == "__main__":
     main()

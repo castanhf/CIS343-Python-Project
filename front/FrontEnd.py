@@ -5,11 +5,13 @@ import sys
 
 class FrontEnd:
 
+    # default constructor
     def __init__(self, player):
         self.player = player
         self.player.play(sys.argv[1])
         curses.wrapper(self.menu)
 
+    # method responsible for menu window
     def menu(self, args):
         self.stdscr = curses.initscr()
         self.stdscr.border()
@@ -32,10 +34,13 @@ class FrontEnd:
                 self.stdscr.touchwin()
                 self.stdscr.refresh()
     
+    # This method shows the song that is currently being played
     def updateSong(self):
         self.stdscr.addstr(15,10, "                                        ")
         self.stdscr.addstr(15,10, "Now playing: " + self.player.getCurrentSong())
 
+    # This method changes the song that was currently playing into
+    # another one that the user's desires to listen
     def changeSong(self):
         changeWindow = curses.newwin(5, 40, 5, 50)
         changeWindow.border()
@@ -50,7 +55,7 @@ class FrontEnd:
         self.player.stop()
         self.player.play(path.decode(encoding="utf-8"))
         
-
+    # quits the program
     def quit(self):
         self.player.stop()
         exit()

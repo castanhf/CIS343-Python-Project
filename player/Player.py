@@ -5,14 +5,18 @@ import wave
 import time
 
 class Player:
+
+    # default constructor
     def __init__(self):
         self.currentSong = "Nothing playing."
         self.paused = True
         self.position = 0
 
+    # getter - mutator - method will get the song that is currently playing
     def getCurrentSong(self):
         return self.currentSong
 
+    # This method stops the song
     def pause(self):
         if self.paused == False:
             self.paused = True
@@ -21,6 +25,7 @@ class Player:
             self.paused = False
             self.stream.start_stream()
 
+    # This method plays the song
     def play(self, track):
         self.paused = False
         self.currentSong = track
@@ -39,6 +44,8 @@ class Player:
         # start the self.stream (4)
         self.stream.start_stream()
 
+    # stops the player
+    # note that it's different from pause
     def stop(self):
         self.stream.stop_stream()
         self.stream.close()
@@ -46,6 +53,7 @@ class Player:
 
         self.p.terminate() 
 
+    # This method is mainly used in the play function of this class
     def callback(self, in_data, frame_count, time_info, status):
         data = self.wf.readframes(frame_count)
         return (data, pyaudio.paContinue)
