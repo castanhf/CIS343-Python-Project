@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+
+# Imports the Library class that is written in Library.py,
+# which is inside the directory called library
+#from library.Library import Library
+
+# Imports the all the user defined exceptions in CLI_Audio_Exception.py,
+# which is inside the directory called front
+from front.CLI_Audio_Exception import *
+
+from front.FrontEnd import FrontEnd
+from player.Player import Player
+from curses import wrapper
+
+def main():
+    player = Player()
+    front_end = FrontEnd(player)
+
+if __name__ == "__main__":
+    main()
