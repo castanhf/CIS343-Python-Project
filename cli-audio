@@ -7,22 +7,22 @@
 # Imports the all the user defined exceptions in CLI_Audio_Exception.py,
 # which is inside the directory called front
 from front.CLI_Audio_Exception import *
-
+from library.Library import Library
 from front.FrontEnd import FrontEnd
 from player.Player import Player
 from curses import wrapper
 
 def main():
     player = Player()
-
+    library = Library()
     # try and except block
     try:
-        front_end = FrontEnd(player)
-    except CLI_Audio_File_Exception:
-        err = CLI_Audio_File_Exception()
+        front_end = FrontEnd(player, library)
+    except CLI_Audio_File_Exception as err:
+#        err = CLI_Audio_File_Exception()
         err.error()
-    except CLI_Audio_Screen_Size_Exception:
-        err = CLI_Audio_Screen_Size_Exception
+    except CLI_Audio_Screen_Size_Exception as err:
+#        err = CLI_Audio_Screen_Size_Exception()
         err.error()
 
 

@@ -6,19 +6,19 @@
 # Python's Exception class
 class CLI_Audio_Exception(Exception):
     def error(self):
-        return "Audio Exception:\n"
+        print("Audio Exception:\n")
 
 # Subclass of CLI_Audio_Exception
 class CLI_Audio_File_Exception(CLI_Audio_Exception):
     def error(self):
         super().error()
-        return "File can't be played for some reason. Maybe it's not there?\n"
+        print("File can't be played for some reason. Maybe it's not there?\n")
 
 # Subclass of CLI_Audio_Exception
 class CLI_Audio_Screen_Size_Exception(CLI_Audio_Exception):
     def error(self):
         super().error()
-        return "Audio Screen Size is too small\n"
+        print("Audio Screen Size is too small\n")
 
 ## NOTES from class:
     # name of file: CLI_Audio_Exception
