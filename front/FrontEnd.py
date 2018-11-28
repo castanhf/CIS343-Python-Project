@@ -50,8 +50,8 @@ class FrontEnd:
         libWindow = curses.newwin(5, 60, 16, 10)
         libWindow.border()
         libWindow.addstr(0,0, "New playlist? 'y' for yes, 'n' for no", curses.A_REVERSE)
-        self.stdscr.refresh()
-        d = self.stdscr.getch()
+        libWindow.refresh()
+        d = libWindow.getch()
         del libWindow
         if d == 27:
             self.quit()
