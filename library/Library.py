@@ -8,7 +8,7 @@ class Library:
 
     def __init__(self):
         self.my_media = (r"/home/castanhf/CIS343/projectPython/cli-audio/media/playlistTemp")
-        playlist = []
+        self.playlist = []
     
     # This method will search the defined directory and 
     # make a playlist
@@ -21,14 +21,4 @@ class Library:
 
     # This method will print the current playlist
     def print_playlist(self):
-        print('\n - - - Playlist - - -\n')
-        print('[{0}]'.format('\n - - - - - - - - - \n'.join(str(i) for i in enumerate(playlist, 1))))
-
-    # This method will ask the user if the playlist is up to his/hers
-    # preferences
-    def playlistOK(self):
-        ok = input('Is this playlist ok? ("y" or "n")\n').lower()
-        if ok == ord('y'):
-            print("Awesome!")
-        elif ok == ord('n'):
-            print("So sorry, but you will have to enjoy it ahah")
+        return '\n - - - Playlist - - -\n[{0}]'.format('\n - - - - - - - - - \n'.join(str(i) for i in enumerate(self.playlist, 1)))

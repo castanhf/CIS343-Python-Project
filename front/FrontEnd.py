@@ -47,9 +47,10 @@ class FrontEnd:
 
     # This method is responsible for the library/playlist
     def updateLibrary(self):
-        libWindow = curses.newwin(5, 60, 16, 10)
+        libWindow = curses.newwin(5, 70, 16, 5)
         libWindow.border()
-        libWindow.addstr(0,0, "New playlist? 'y' for yes, 'n' for no", curses.A_REVERSE)
+        libWindow.addstr(0,0, 'New playlist? "y" for yes, "n" for no', curses.A_REVERSE)
+        #libWindow.addstr(1,0, "Current playlist: " + self.library.my_media + "\n")
         libWindow.refresh()
         d = libWindow.getch()
         del libWindow
@@ -62,32 +63,56 @@ class FrontEnd:
             # does not show up
             tempLibrary = curses.newwin(5, 40, 5, 50)
             tempLibrary.border()
-            tempLibrary.addstr(0,0, "What is the playlist path?", curses.A_REVERSE)
+            tempLibrary.addstr(0,0, 'What is the playlist path?', curses.A_REVERSE)
             self.stdscr.refresh()
             curses.echo()
-            library.my_media = tempLibrary.getstr(1,1, 30)
+            self.library.my_media = tempLibrary.getstr(1,1, 30)
             curses.noecho()
-            library.createMedia()
+            self.library.createMedia()
             del tempLibrary
-            self.stdscr.addstr(15,10, "                                    ")
-            self.stdscr.addstr(15,10, "" + library.print_playlist())
-            library.playlistOK()
+            self.stdscr.addstr(22,25, "                                    ")
+            self.stdscr.addstr(22,25, "" + self.library.print_playlist())
+            #self.library.playlistOK()
+            youOk = curses.newwin(5, 40, 5, 50)
+            youOk.border()
+            youOk.addstr(0,0, 'Is this playlist ok? ("y" or "n")', curses.A_REVERSE)
+            self.stdscr.refresh()
+            e = youOk.getch()
+            del youOk
+            if e == 27:
+                self.quit()
+            elif e == ord('y'):
+                self.stdscr.addstr(7, 35, 'Awesome!')
+            elif e == ord('n'):
+                self.stdscr.addstr(7, 35, 'You will have to enjoy it anyway')
         elif d == ord('n'):
-            self.stdscr.addstr(15,10, "                                    ")
-            self.stdscr.addstr(15,10, "" + library.print_playlist())
-            library.playlistOK()
+            self.stdscr.addstr(22,25, "                                    ")
+            self.stdscr.addstr(22,25, "" + self.library.print_playlist())
+            #self.library.playlistOK()
+            youOk2 = curses.newwin(5, 40, 5, 50)
+            youOk2.border()
+            youOk2.addstr(0,0, 'Is this playlist ok? ("y" or "n")', curses.A_REVERSE)
+            self.stdscr.refresh()
+            f = youOk2.getch()
+            del youOk2
+            if f == 27:
+                self.quit()
+            elif f == ord('y'):
+                self.stdscr.addstr(7, 35, 'Awesome!')
+            elif f == ord('n'):
+                self.stdscr.addstr(7, 35, 'You will have to enjoy it anyway')
     
     # This method shows the song that is currently being played
     def updateSong(self):
-        self.stdscr.addstr(15,10, "                                        ")
-        self.stdscr.addstr(15,10, "Now playing: " + self.player.getCurrentSong())
+        self.stdscr.addstr(15,10, '                                           ')
+        self.stdscr.addstr(15,10, 'Now playing: ' + self.player.getCurrentSong())
 
     # This method changes the song that was currently playing into
     # another one that the user's desires to listen
     def changeSong(self):
         changeWindow = curses.newwin(5, 40, 5, 50)
         changeWindow.border()
-        changeWindow.addstr(0,0, "What is the file path?", curses.A_REVERSE)
+        changeWindow.addstr(0,0, 'What is the file path?', curses.A_REVERSE)
         self.stdscr.refresh()
         curses.echo()
         path = changeWindow.getstr(1,1, 30)
